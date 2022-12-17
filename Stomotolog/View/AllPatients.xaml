@@ -1,0 +1,151 @@
+﻿<Page x:Class="Stomotolog.View.AllPatients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Stomotolog.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AllPatients">
+
+    <Page.Resources>
+        <Style TargetType="ListView" x:Key="Allergy">
+            <Style.Resources>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="White"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <ContextMenu x:Key="cmButton">
+            <MenuItem Header="Выписать пациента" Click="DeleteMenuClick" />
+            <MenuItem Header="Записать на прием" Click="ChangeTimeMenuClick"/>
+            <MenuItem Header="Редактировать зубную формулу" Click="ChangeDentalFormClick"/>
+            <MenuItem Header="Просмотр истории посещений" Click="HistoryClick"/>
+            <MenuItem Header="Информация об аллергических заболеваниях">
+                <MenuItem Header="Просмотр информации" Click="CheckAllergyClick"/>
+                <MenuItem Header="Редактирование информации" Click="EditAllergyClick" />
+                
+            </MenuItem>
+        </ContextMenu>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+
+        <Image HorizontalAlignment="Left" Width="127" Height="47" Source="/Assets/images/logo.png"/>
+        <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 100 0" x:Name="TextBlockUserName"/>
+        <Button HorizontalAlignment="Left" MaxHeight="25" x:Name="AddPatientButton" Margin="160,10,0,10" Click="AddPatientButtonClick" >Добавить пациента</Button>
+        <Button HorizontalAlignment="Left" MaxHeight="25" x:Name="NearestButton" Margin="290, 10, 0, 10" Click="NearestButtonClick">Расписание</Button>
+        <Button HorizontalAlignment="Left" MaxHeight="25" x:Name="ExtractButton" Margin="375, 10, 0, 10" Click="ExtractButtonClick" Cursor="Hand">Выписанные пациенты</Button>
+        <Button HorizontalAlignment="Right" MaxHeight="25" x:Name="LogOutButton" Margin="0, 10, 20, 10" Click="LogOutButtonClick">Выход</Button>
+        
+        
+        <ListView Grid.Row="2" x:Name="PatientsListView" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="100" >
+                        <Grid.RowDefinitions >
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Grid Grid.Row="1">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Surname}"></TextBlock>
+                                <TextBlock Grid.Row="1" Text="{Binding Name}"></TextBlock>
+                                <TextBlock Grid.Row="2" Text="{Binding MiddleName}"></TextBlock>
+                                <Button Name="ContextButton" Grid.Row="3" Height="30"  Click="ContextButton_Click">
+                                    Опции
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Center"/>
+
+                </ItemsPanelTemplate>
+
+            </ListView.ItemsPanel>
+        </ListView>
+        <Grid Grid.Row="2" x:Name="ChangeTime" Visibility="Collapsed">
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Calendar x:Name="DateTextBoxCalendar" FirstDayOfWeek="Monday"/>
+                <TextBlock>Время приема</TextBlock>
+                <TextBox x:Name="TimeTextBox" MaxWidth="175"/>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="MakeАppointmentButton" Click="MakeАppointment_Click">Записать на прием</Button>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="BackTimeButton" Click="BackTimeButton_Click">Назад</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="AddPatient" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock>Фамилия</TextBlock>
+                <TextBox x:Name="SureNameTextBox" MaxWidth="110"/>
+                <Separator Opacity="0" Height="10"/>
+                <TextBlock>Имя</TextBlock>
+                <TextBox x:Name="NameTextBox" MaxWidth="110"/>
+                <Separator Opacity="0" Height="10"/>
+                <TextBlock>Отчество</TextBlock>
+                <TextBox x:Name="LastNameTextBox" MaxWidth="110"/>
+                <Separator Opacity="0" Height="10"/>
+                <TextBlock>Номер телефона</TextBlock>
+                <TextBox x:Name="PhoneTextBox" MaxWidth="110"/>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="СonfirmPatientButton" Click="AddPatient_Click">Добавить пациента</Button>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="BackPatientButton" Click="BackPatientButton_Click">Назад</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="SelectAllergy" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="150">
+                <TextBlock x:Name="PatientAllergyTextBlock" TextWrapping="Wrap"/>
+                <Separator Opacity="0" Height="10"/>
+                <ComboBox x:Name="AllergyComboBox"/>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="SaveAllergyButton" Click="SaveAllergyButton_Click">Сохранить изменения</Button>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="CloseAllergyButton" Click="CloseAllergyButton_Click">Назад</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" x:Name="CheckAllergy" Visibility="Collapsed">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="Name"/>
+                <Separator Opacity="0" Height="10"/>
+                <TextBlock x:Name="NoAllergyTextBlock">У этого пациента отсутствует аллергия</TextBlock>
+                <ListView MaxWidth="180" Margin="10,0,10,0" Grid.Row="1" x:Name="AllergyListView" MaxHeight="200" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource ResourceKey=Allergy}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="200" TextBlock.TextAlignment="Center" DisplayMemberBinding="{Binding Allergy.NameAllergy}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <Separator Opacity="0" Height="10"/>
+                <Button Click="AllergyQuit">Назад</Button>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="2" Visibility="Collapsed" x:Name="ConclusionGrid">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock>ЗАКЛЮЧЕНИЕ</TextBlock>
+                <Separator Opacity="0" Height="10"/>
+                <TextBox x:Name="ConclusionTextBox" Width="300" MaxWidth="300" MaxHeight="250"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="SaveConclusionButton" Click="SaveConclusionButtonClick">Сохранить</Button>
+                <Separator Opacity="0" Height="10"/>
+                <Button x:Name="BackButton" Click="BackButtonClick">Отмена</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

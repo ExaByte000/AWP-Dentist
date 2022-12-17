@@ -1,0 +1,787 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище StomotologModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Allergy">
+          <Key>
+            <PropertyRef Name="IDAllergy" />
+          </Key>
+          <Property Name="IDAllergy" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameAllergy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DentalForm">
+          <Key>
+            <PropertyRef Name="IDDentalForm" />
+          </Key>
+          <Property Name="IDDentalForm" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="TeethID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Discription" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="IDDiagnosis" />
+          </Key>
+          <Property Name="IDDiagnosis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DagnosisName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Extract">
+          <Key>
+            <PropertyRef Name="IDExtract" />
+          </Key>
+          <Property Name="IDExtract" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="IDHistory" />
+          </Key>
+          <Property Name="IDHistory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Сomplaints" Type="nvarchar" MaxLength="200" />
+          <Property Name="Results" Type="nvarchar" MaxLength="200" />
+          <Property Name="LaborСosts" Type="nvarchar" MaxLength="200" />
+          <Property Name="DiagnosisID" Type="int" />
+          <Property Name="Complications" Type="nvarchar" MaxLength="200" />
+          <Property Name="Stage" Type="nvarchar" MaxLength="200" />
+          <Property Name="ICDcode" Type="nvarchar" MaxLength="25" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatAlle">
+          <Key>
+            <PropertyRef Name="IDPatAlle" />
+          </Key>
+          <Property Name="IDPatAlle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="AllergyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatDiag">
+          <Key>
+            <PropertyRef Name="IDPatDiag" />
+          </Key>
+          <Property Name="IDPatDiag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="DiagnosisID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="IDPatient" />
+          </Key>
+          <Property Name="IDPatient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="IDShedule" />
+          </Key>
+          <Property Name="IDShedule" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Сomplaints" Type="nvarchar" MaxLength="200" />
+          <Property Name="Results" Type="nvarchar" MaxLength="200" />
+          <Property Name="LaborСosts" Type="nvarchar" MaxLength="200" />
+          <Property Name="DiagnosisID" Type="int" />
+          <Property Name="Complications" Type="nvarchar" MaxLength="200" />
+          <Property Name="Stage" Type="nvarchar" MaxLength="200" />
+          <Property Name="ICDcode" Type="nvarchar" MaxLength="25" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teeth">
+          <Key>
+            <PropertyRef Name="IDTeeth" />
+          </Key>
+          <Property Name="IDTeeth" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumberingTeeth" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_DentalForm_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="DentalForm" Type="Self.DentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="DentalForm">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DentalForm_Teeth">
+          <End Role="Teeth" Type="Self.Teeth" Multiplicity="1" />
+          <End Role="DentalForm" Type="Self.DentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teeth">
+              <PropertyRef Name="IDTeeth" />
+            </Principal>
+            <Dependent Role="DentalForm">
+              <PropertyRef Name="TeethID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Diagnoses">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1" />
+          <End Role="History" Type="Self.History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IDDiagnosis" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="DiagnosisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatAlle_Allergy">
+          <End Role="Allergy" Type="Self.Allergy" Multiplicity="1" />
+          <End Role="PatAlle" Type="Self.PatAlle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allergy">
+              <PropertyRef Name="IDAllergy" />
+            </Principal>
+            <Dependent Role="PatAlle">
+              <PropertyRef Name="AllergyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatAlle_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="PatAlle" Type="Self.PatAlle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="PatAlle">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatDiag_Diagnoses">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="1" />
+          <End Role="PatDiag" Type="Self.PatDiag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IDDiagnosis" />
+            </Principal>
+            <Dependent Role="PatDiag">
+              <PropertyRef Name="DiagnosisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatDiag_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="PatDiag" Type="Self.PatDiag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="PatDiag">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Diagnoses">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IDDiagnosis" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="DiagnosisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Patients1">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище StomotologModelContainer">
+          <EntitySet Name="Allergy" EntityType="Self.Allergy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DentalForm" EntityType="Self.DentalForm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Extract" EntityType="Self.Extract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatAlle" EntityType="Self.PatAlle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatDiag" EntityType="Self.PatDiag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teeth" EntityType="Self.Teeth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DentalForm_Patients" Association="Self.FK_DentalForm_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="DentalForm" EntitySet="DentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DentalForm_Teeth" Association="Self.FK_DentalForm_Teeth">
+            <End Role="Teeth" EntitySet="Teeth" />
+            <End Role="DentalForm" EntitySet="DentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Diagnoses" Association="Self.FK_History_Diagnoses">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatAlle_Allergy" Association="Self.FK_PatAlle_Allergy">
+            <End Role="Allergy" EntitySet="Allergy" />
+            <End Role="PatAlle" EntitySet="PatAlle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatAlle_Patients" Association="Self.FK_PatAlle_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatAlle" EntitySet="PatAlle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatDiag_Diagnoses" Association="Self.FK_PatDiag_Diagnoses">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="PatDiag" EntitySet="PatDiag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatDiag_Patients" Association="Self.FK_PatDiag_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatDiag" EntitySet="PatDiag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Users" Association="Self.FK_Patients_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Diagnoses" Association="Self.FK_Schedule_Diagnoses">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Patients1" Association="Self.FK_Schedule_Patients1">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StomotologModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="StomotologEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Allergy" EntityType="StomotologModel.Allergy" />
+          <EntitySet Name="DentalForm" EntityType="StomotologModel.DentalForm" />
+          <EntitySet Name="Diagnoses" EntityType="StomotologModel.Diagnoses" />
+          <EntitySet Name="Extract" EntityType="StomotologModel.Extract" />
+          <EntitySet Name="History" EntityType="StomotologModel.History" />
+          <EntitySet Name="PatAlle" EntityType="StomotologModel.PatAlle" />
+          <EntitySet Name="PatDiag" EntityType="StomotologModel.PatDiag" />
+          <EntitySet Name="Patients" EntityType="StomotologModel.Patients" />
+          <EntitySet Name="Schedule" EntityType="StomotologModel.Schedule" />
+          <EntitySet Name="sysdiagrams" EntityType="StomotologModel.sysdiagrams" />
+          <EntitySet Name="Teeth" EntityType="StomotologModel.Teeth" />
+          <EntitySet Name="Users" EntityType="StomotologModel.Users" />
+          <AssociationSet Name="FK_PatAlle_Allergy" Association="StomotologModel.FK_PatAlle_Allergy">
+            <End Role="Allergy" EntitySet="Allergy" />
+            <End Role="PatAlle" EntitySet="PatAlle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DentalForm_Patients" Association="StomotologModel.FK_DentalForm_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="DentalForm" EntitySet="DentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DentalForm_Teeth" Association="StomotologModel.FK_DentalForm_Teeth">
+            <End Role="Teeth" EntitySet="Teeth" />
+            <End Role="DentalForm" EntitySet="DentalForm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Diagnoses" Association="StomotologModel.FK_History_Diagnoses">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatDiag_Diagnoses" Association="StomotologModel.FK_PatDiag_Diagnoses">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="PatDiag" EntitySet="PatDiag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Diagnoses" Association="StomotologModel.FK_Schedule_Diagnoses">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatAlle_Patients" Association="StomotologModel.FK_PatAlle_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatAlle" EntitySet="PatAlle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatDiag_Patients" Association="StomotologModel.FK_PatDiag_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatDiag" EntitySet="PatDiag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Users" Association="StomotologModel.FK_Patients_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Schedule_Patients1" Association="StomotologModel.FK_Schedule_Patients1">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Allergy">
+          <Key>
+            <PropertyRef Name="IDAllergy" />
+          </Key>
+          <Property Name="IDAllergy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameAllergy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PatAlle" Relationship="StomotologModel.FK_PatAlle_Allergy" FromRole="Allergy" ToRole="PatAlle" />
+        </EntityType>
+        <EntityType Name="DentalForm">
+          <Key>
+            <PropertyRef Name="IDDentalForm" />
+          </Key>
+          <Property Name="IDDentalForm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="TeethID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Discription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Patients" Relationship="StomotologModel.FK_DentalForm_Patients" FromRole="DentalForm" ToRole="Patients" />
+          <NavigationProperty Name="Teeth" Relationship="StomotologModel.FK_DentalForm_Teeth" FromRole="DentalForm" ToRole="Teeth" />
+        </EntityType>
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="IDDiagnosis" />
+          </Key>
+          <Property Name="IDDiagnosis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DagnosisName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="History" Relationship="StomotologModel.FK_History_Diagnoses" FromRole="Diagnoses" ToRole="History" />
+          <NavigationProperty Name="PatDiag" Relationship="StomotologModel.FK_PatDiag_Diagnoses" FromRole="Diagnoses" ToRole="PatDiag" />
+          <NavigationProperty Name="Schedule" Relationship="StomotologModel.FK_Schedule_Diagnoses" FromRole="Diagnoses" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Extract">
+          <Key>
+            <PropertyRef Name="IDExtract" />
+          </Key>
+          <Property Name="IDExtract" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="IDHistory" />
+          </Key>
+          <Property Name="IDHistory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Сomplaints" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Results" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LaborСosts" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DiagnosisID" Type="Int32" />
+          <Property Name="Complications" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Stage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ICDcode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Diagnoses" Relationship="StomotologModel.FK_History_Diagnoses" FromRole="History" ToRole="Diagnoses" />
+        </EntityType>
+        <EntityType Name="PatAlle">
+          <Key>
+            <PropertyRef Name="IDPatAlle" />
+          </Key>
+          <Property Name="IDPatAlle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="AllergyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Allergy" Relationship="StomotologModel.FK_PatAlle_Allergy" FromRole="PatAlle" ToRole="Allergy" />
+          <NavigationProperty Name="Patients" Relationship="StomotologModel.FK_PatAlle_Patients" FromRole="PatAlle" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="PatDiag">
+          <Key>
+            <PropertyRef Name="IDPatDiag" />
+          </Key>
+          <Property Name="IDPatDiag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="DiagnosisID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Diagnoses" Relationship="StomotologModel.FK_PatDiag_Diagnoses" FromRole="PatDiag" ToRole="Diagnoses" />
+          <NavigationProperty Name="Patients" Relationship="StomotologModel.FK_PatDiag_Patients" FromRole="PatDiag" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="IDPatient" />
+          </Key>
+          <Property Name="IDPatient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DentalForm" Relationship="StomotologModel.FK_DentalForm_Patients" FromRole="Patients" ToRole="DentalForm" />
+          <NavigationProperty Name="PatAlle" Relationship="StomotologModel.FK_PatAlle_Patients" FromRole="Patients" ToRole="PatAlle" />
+          <NavigationProperty Name="PatDiag" Relationship="StomotologModel.FK_PatDiag_Patients" FromRole="Patients" ToRole="PatDiag" />
+          <NavigationProperty Name="Users" Relationship="StomotologModel.FK_Patients_Users" FromRole="Patients" ToRole="Users" />
+          <NavigationProperty Name="Schedule" Relationship="StomotologModel.FK_Schedule_Patients1" FromRole="Patients" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="IDShedule" />
+          </Key>
+          <Property Name="IDShedule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Сomplaints" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Results" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LaborСosts" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DiagnosisID" Type="Int32" />
+          <Property Name="Complications" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Stage" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ICDcode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Diagnoses" Relationship="StomotologModel.FK_Schedule_Diagnoses" FromRole="Schedule" ToRole="Diagnoses" />
+          <NavigationProperty Name="Patients" Relationship="StomotologModel.FK_Schedule_Patients1" FromRole="Schedule" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teeth">
+          <Key>
+            <PropertyRef Name="IDTeeth" />
+          </Key>
+          <Property Name="IDTeeth" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumberingTeeth" Type="Int32" />
+          <NavigationProperty Name="DentalForm" Relationship="StomotologModel.FK_DentalForm_Teeth" FromRole="Teeth" ToRole="DentalForm" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Patients" Relationship="StomotologModel.FK_Patients_Users" FromRole="Users" ToRole="Patients" />
+        </EntityType>
+        <Association Name="FK_PatAlle_Allergy">
+          <End Type="StomotologModel.Allergy" Role="Allergy" Multiplicity="1" />
+          <End Type="StomotologModel.PatAlle" Role="PatAlle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Allergy">
+              <PropertyRef Name="IDAllergy" />
+            </Principal>
+            <Dependent Role="PatAlle">
+              <PropertyRef Name="AllergyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DentalForm_Patients">
+          <End Type="StomotologModel.Patients" Role="Patients" Multiplicity="1" />
+          <End Type="StomotologModel.DentalForm" Role="DentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="DentalForm">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DentalForm_Teeth">
+          <End Type="StomotologModel.Teeth" Role="Teeth" Multiplicity="1" />
+          <End Type="StomotologModel.DentalForm" Role="DentalForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teeth">
+              <PropertyRef Name="IDTeeth" />
+            </Principal>
+            <Dependent Role="DentalForm">
+              <PropertyRef Name="TeethID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Diagnoses">
+          <End Type="StomotologModel.Diagnoses" Role="Diagnoses" Multiplicity="0..1" />
+          <End Type="StomotologModel.History" Role="History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IDDiagnosis" />
+            </Principal>
+            <Dependent Role="History">
+              <PropertyRef Name="DiagnosisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatDiag_Diagnoses">
+          <End Type="StomotologModel.Diagnoses" Role="Diagnoses" Multiplicity="1" />
+          <End Type="StomotologModel.PatDiag" Role="PatDiag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IDDiagnosis" />
+            </Principal>
+            <Dependent Role="PatDiag">
+              <PropertyRef Name="DiagnosisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Diagnoses">
+          <End Type="StomotologModel.Diagnoses" Role="Diagnoses" Multiplicity="0..1" />
+          <End Type="StomotologModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IDDiagnosis" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="DiagnosisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatAlle_Patients">
+          <End Type="StomotologModel.Patients" Role="Patients" Multiplicity="1" />
+          <End Type="StomotologModel.PatAlle" Role="PatAlle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="PatAlle">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatDiag_Patients">
+          <End Type="StomotologModel.Patients" Role="Patients" Multiplicity="1" />
+          <End Type="StomotologModel.PatDiag" Role="PatDiag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="PatDiag">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Users">
+          <End Type="StomotologModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="StomotologModel.Patients" Role="Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Schedule_Patients1">
+          <End Type="StomotologModel.Patients" Role="Patients" Multiplicity="1" />
+          <End Type="StomotologModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IDPatient" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="PatientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StomotologModelContainer" CdmEntityContainer="StomotologEntities">
+          <EntitySetMapping Name="Allergy">
+            <EntityTypeMapping TypeName="StomotologModel.Allergy">
+              <MappingFragment StoreEntitySet="Allergy">
+                <ScalarProperty Name="NameAllergy" ColumnName="NameAllergy" />
+                <ScalarProperty Name="IDAllergy" ColumnName="IDAllergy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DentalForm">
+            <EntityTypeMapping TypeName="StomotologModel.DentalForm">
+              <MappingFragment StoreEntitySet="DentalForm">
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TeethID" ColumnName="TeethID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="IDDentalForm" ColumnName="IDDentalForm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnoses">
+            <EntityTypeMapping TypeName="StomotologModel.Diagnoses">
+              <MappingFragment StoreEntitySet="Diagnoses">
+                <ScalarProperty Name="DagnosisName" ColumnName="DagnosisName" />
+                <ScalarProperty Name="IDDiagnosis" ColumnName="IDDiagnosis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Extract">
+            <EntityTypeMapping TypeName="StomotologModel.Extract">
+              <MappingFragment StoreEntitySet="Extract">
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="IDExtract" ColumnName="IDExtract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History">
+            <EntityTypeMapping TypeName="StomotologModel.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ICDcode" ColumnName="ICDcode" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Complications" ColumnName="Complications" />
+                <ScalarProperty Name="DiagnosisID" ColumnName="DiagnosisID" />
+                <ScalarProperty Name="LaborСosts" ColumnName="LaborСosts" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+                <ScalarProperty Name="Сomplaints" ColumnName="Сomplaints" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="IDHistory" ColumnName="IDHistory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatAlle">
+            <EntityTypeMapping TypeName="StomotologModel.PatAlle">
+              <MappingFragment StoreEntitySet="PatAlle">
+                <ScalarProperty Name="AllergyID" ColumnName="AllergyID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="IDPatAlle" ColumnName="IDPatAlle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatDiag">
+            <EntityTypeMapping TypeName="StomotologModel.PatDiag">
+              <MappingFragment StoreEntitySet="PatDiag">
+                <ScalarProperty Name="DiagnosisID" ColumnName="DiagnosisID" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="IDPatDiag" ColumnName="IDPatDiag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="StomotologModel.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="IDPatient" ColumnName="IDPatient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="StomotologModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="ICDcode" ColumnName="ICDcode" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Complications" ColumnName="Complications" />
+                <ScalarProperty Name="DiagnosisID" ColumnName="DiagnosisID" />
+                <ScalarProperty Name="LaborСosts" ColumnName="LaborСosts" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+                <ScalarProperty Name="Сomplaints" ColumnName="Сomplaints" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+                <ScalarProperty Name="IDShedule" ColumnName="IDShedule" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StomotologModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teeth">
+            <EntityTypeMapping TypeName="StomotologModel.Teeth">
+              <MappingFragment StoreEntitySet="Teeth">
+                <ScalarProperty Name="NumberingTeeth" ColumnName="NumberingTeeth" />
+                <ScalarProperty Name="IDTeeth" ColumnName="IDTeeth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="StomotologModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

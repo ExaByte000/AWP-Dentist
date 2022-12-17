@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba289f9c483a4a8392d660e8463447e5" Name="Diagram1">
+        <EntityTypeShape EntityType="StomotologModel.Allergy" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="StomotologModel.DentalForm" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="StomotologModel.Diagnoses" Width="1.5" PointX="3" PointY="10.625" />
+        <EntityTypeShape EntityType="StomotologModel.Extract" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StomotologModel.History" Width="1.5" PointX="5.25" PointY="12.875" />
+        <EntityTypeShape EntityType="StomotologModel.PatAlle" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="StomotologModel.PatDiag" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="StomotologModel.Patients" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="StomotologModel.Schedule" Width="1.5" PointX="8.25" PointY="5.75" />
+        <EntityTypeShape EntityType="StomotologModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StomotologModel.Teeth" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="StomotologModel.Users" Width="1.5" PointX="0.75" PointY="6.375" />
+        <AssociationConnector Association="StomotologModel.FK_PatAlle_Allergy" />
+        <AssociationConnector Association="StomotologModel.FK_DentalForm_Patients" />
+        <AssociationConnector Association="StomotologModel.FK_DentalForm_Teeth" />
+        <AssociationConnector Association="StomotologModel.FK_History_Diagnoses" />
+        <AssociationConnector Association="StomotologModel.FK_PatDiag_Diagnoses" />
+        <AssociationConnector Association="StomotologModel.FK_Schedule_Diagnoses" />
+        <AssociationConnector Association="StomotologModel.FK_PatAlle_Patients" />
+        <AssociationConnector Association="StomotologModel.FK_PatDiag_Patients" />
+        <AssociationConnector Association="StomotologModel.FK_Patients_Users" />
+        <AssociationConnector Association="StomotologModel.FK_Schedule_Patients1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

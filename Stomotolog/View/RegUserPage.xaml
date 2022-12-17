@@ -1,0 +1,38 @@
+﻿<Page x:Class="Stomotolog.View.RegUserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Stomotolog.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegUser">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>РЕГИСТРАЦИЯ</TextBlock>
+            <TextBlock>Фамилия</TextBlock>
+            <TextBox x:Name="SureNameTextBox"></TextBox>
+            <Separator Opacity="0" Height="10"/>
+            <TextBlock>Имя</TextBlock>
+            <TextBox x:Name="NameTextBox"></TextBox>
+            <Separator Opacity="0" Height="10"/>
+            <TextBlock>Отчество</TextBlock>
+            <TextBox x:Name="LastNameTextBox"></TextBox>
+            <Separator Opacity="0" Height="10"/>
+            <TextBlock>Логин</TextBlock>
+            <TextBox x:Name="LogInTextBox"></TextBox>
+            <Separator Opacity="0" Height="10"/>
+            <TextBlock>Пароль</TextBlock>
+            <PasswordBox x:Name="AuthPasswordBox"></PasswordBox>
+            <Separator Opacity="0" Height="10"/>
+            <TextBlock>Подтвердите пароль</TextBlock>
+            <PasswordBox x:Name="AuthPasswordBox2"></PasswordBox>
+            <Separator Opacity="0" Height="10"/>
+            <Button x:Name="SindInButton" Click="RegButton_Click">Зарегестрироваться</Button>
+            <Separator Opacity="0" Height="10"/>
+            <Button x:Name="RegTextBlock" Click="LoginButton_Click">Войти</Button>
+        </StackPanel>
+        
+    </Grid>
+</Page>

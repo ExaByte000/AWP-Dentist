@@ -1,0 +1,22 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Style TargetType="Button">
+        <Setter Property="Control.Background" Value="#71D4FF"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style TargetType="ListViewItem">
+        <Setter Property="Background" Value="#4687A3"/>
+        <Style.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="BorderThickness" Value="20,20,20,20"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+    
+</ResourceDictionary>
